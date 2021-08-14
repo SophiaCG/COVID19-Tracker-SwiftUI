@@ -6,7 +6,6 @@ target 'COVID19-Tracker-SwiftUI' do
   use_frameworks!
 
   # Pods for COVID19-Tracker-SwiftUI
-  pod 'Charts'
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
