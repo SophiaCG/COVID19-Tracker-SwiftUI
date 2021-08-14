@@ -15,7 +15,7 @@ class ViewModel: ObservableObject {
     let apiKey = "API-KEY-HERE"
     
 //MARK: - Language List API Call
-    func getResults(completion:@escaping ([Results]) -> ()) {
+    func getResults(completion:@escaping ([CountryResults]) -> ()) {
         
         guard let url = URL(string: "https://corona.lmao.ninja/v2/countries") else {
             print("Invalid URL")
@@ -29,7 +29,7 @@ class ViewModel: ObservableObject {
             }
             
             do {
-                let results = try JSONDecoder().decode([Results].self, from: data!)
+                let results = try JSONDecoder().decode([CountryResults].self, from: data!)
                 
                 DispatchQueue.main.async {
                     self.country = results[0].country

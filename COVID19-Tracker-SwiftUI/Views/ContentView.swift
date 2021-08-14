@@ -39,7 +39,7 @@ struct ContentView: View {
                 ChartDataEntry(x: 4, y: 64),
                 ChartDataEntry(x: 5, y: 15)
 
-            ]).frame(width: UIScreen.main.bounds.width * 0.9, height: 300, alignment: .center)
+            ]).frame(width: UIScreen.main.bounds.width * 0.9, height: 250, alignment: .center)
         }
     }
 }
