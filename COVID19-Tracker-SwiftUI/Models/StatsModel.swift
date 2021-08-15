@@ -7,6 +7,28 @@
 
 import Foundation
 
+
+//MARK: - World Statistics
+
+struct WorldResults: Codable {
+    var data: Data
+}
+
+struct Data: Codable {
+    var summary: Summary
+    var change: Summary
+}
+
+struct Summary: Codable {
+    var total_cases: Int
+    var active_cases: Int
+    var deaths: Int
+    var recovered: Int
+    var critical: Int
+    var tested: Int
+    
+}
+
 //MARK: - Statistics from every country
 
 struct CountryResults: Codable {

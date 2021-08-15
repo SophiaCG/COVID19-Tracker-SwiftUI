@@ -10,14 +10,12 @@ import SwiftUI
 
 class ViewModel: ObservableObject {
     
-    var country = ""
-
     let apiKey = "API-KEY-HERE"
-    
+
 //MARK: - Language List API Call
-    func getResults(completion:@escaping ([CountryResults]) -> ()) {
+    func getResults(completion:@escaping (WorldResults) -> ()) {
         
-        guard let url = URL(string: "https://corona.lmao.ninja/v2/countries") else {
+        guard let url = URL(string: "https://api.quarantine.country/api/v1/summary/latest") else {
             print("Invalid URL")
             return
         }
@@ -29,11 +27,10 @@ class ViewModel: ObservableObject {
             }
             
             do {
-                let results = try JSONDecoder().decode([CountryResults].self, from: data!)
+                let results = try JSONDecoder().decode(WorldResults.self, from: data!)
                 
                 DispatchQueue.main.async {
-                    self.country = results[0].country
-                    print("RESULT: \(self.country)")
+                    print("RESULT: \(results.data.summary.total_cases)")
                     completion(results)
                 }
             } catch {

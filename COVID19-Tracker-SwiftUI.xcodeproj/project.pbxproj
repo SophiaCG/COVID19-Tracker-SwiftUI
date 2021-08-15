@@ -211,6 +211,9 @@
 			isa = PBXGroup;
 			children = (
 				4AC040F326C76EAD00EBFC79 /* ViewModel.swift */,
+				4AD0E99B26C7986F00C444D5 /* BarChart.swift */,
+				4AD0E99F26C79A7000C444D5 /* LineChart.swift */,
+				4AD0E9A126C7A12800C444D5 /* PieChart.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -219,9 +222,6 @@
 			isa = PBXGroup;
 			children = (
 				4AC040CA26C7378A00EBFC79 /* ContentView.swift */,
-				4AD0E99B26C7986F00C444D5 /* BarChart.swift */,
-				4AD0E99F26C79A7000C444D5 /* LineChart.swift */,
-				4AD0E9A126C7A12800C444D5 /* PieChart.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
