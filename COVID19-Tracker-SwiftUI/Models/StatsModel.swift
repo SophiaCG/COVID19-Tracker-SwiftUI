@@ -29,6 +29,16 @@ struct Summary: Codable {
     
 }
 
+//MARK: - List of Countries
+
+struct CountriesResults: Codable {
+    var data: [ListData]
+}
+
+struct ListData: Codable {
+    var name: String
+}
+
 //MARK: - Statistics from every country
 
 struct CountryResults: Codable {

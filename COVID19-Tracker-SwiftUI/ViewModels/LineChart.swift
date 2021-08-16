@@ -21,7 +21,7 @@ struct LineChart : UIViewRepresentable {
         chart.xAxis.drawGridLinesEnabled = false
         chart.rightAxis.enabled = false
         chart.xAxis.labelPosition = .bottom
-        chart.legend.enabled = false
+        chart.legend.enabled = true
         
         
         return chart
