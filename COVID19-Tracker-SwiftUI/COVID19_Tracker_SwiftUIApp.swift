@@ -20,7 +20,7 @@ struct COVID19_Tracker_SwiftUIApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NewsView()
         }
     }
 }

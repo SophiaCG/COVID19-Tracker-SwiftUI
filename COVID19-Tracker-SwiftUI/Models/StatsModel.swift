@@ -11,10 +11,10 @@ import Foundation
 //MARK: - World Statistics
 
 struct WorldResults: Codable {
-    var data: Data
+    var data: WorldData
 }
 
-struct Data: Codable {
+struct WorldData: Codable {
     var summary: Summary
     var change: Summary
 }
