@@ -7,6 +7,7 @@
 import Foundation
 
 //MARK: - Statistics from every country
+
 struct StatsResults: Codable {
     var Country: String
     var Continent: String
@@ -23,6 +24,7 @@ struct StatsResults: Codable {
 }
 
 //MARK: - List of Countries
+
 struct CountriesList: Codable {
     var Country: String
     var ThreeLetterSymbol: String

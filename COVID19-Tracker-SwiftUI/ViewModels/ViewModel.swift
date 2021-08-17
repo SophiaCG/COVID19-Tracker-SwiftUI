@@ -44,6 +44,35 @@ class ViewModel: ObservableObject {
 
     func getList(completion:@escaping ([CountriesList]) -> ()) {
         
+        guard let url = URL(string: "https://vaccovid-coronavirus-vaccine-and-treatment-tracker.p.rapidapi.com/api/npm-covid-data/world?rapidapi-key=\(apiKey)") else {
+            print("Invalid URL")
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard data != nil else {
+                print("TASK ERROR 1: \(String(describing: error))")
+                return
+            }
+            
+            do {
+                let results = try JSONDecoder().decode([StatsResults].self, from: data!)
+                
+                DispatchQueue.main.async {
+                    print("RESULT: \(results[0].ActiveCases)")
+//                    self.result?.append(results[0])
+//                    print("NEW RESULT: \(String(describing: self.result?[0].ActiveCases))")
+                    completion(results)
+                }
+            } catch {
+                print("RESULTS ERROR 1: \(error)")
+            }
+        }
+        task.resume()
+    }
+
+    func getList(completion:@escaping ([CountriesList]) -> ()) {
+        
         guard let url = URL(string: "https://vaccovid-coronavirus-vaccine-and-treatment-tracker.p.rapidapi.com/api/npm-covid-data/countries-name-ordered?rapidapi-key=\(apiKey)") else {
             print("Invalid URL")
             return

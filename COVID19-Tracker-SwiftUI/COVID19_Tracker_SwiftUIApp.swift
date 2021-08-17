@@ -19,6 +19,8 @@ struct COVID19_Tracker_SwiftUIApp: App {
     }
     
     @State var text: String = ""
+    @State var isEditing: Bool = false
+    
     var body: some Scene {
         WindowGroup {
             ContentView(text: $text)

@@ -4,6 +4,7 @@
 //
 //  Created by SCG on 8/16/21.
 //
+
 import SwiftUI
 
 // Code from: https://www.hackingwithswift.com/forums/swiftui/loading-images/3292
