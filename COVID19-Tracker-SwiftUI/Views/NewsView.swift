@@ -58,6 +58,7 @@ struct NewsView: View {
                         .padding(.bottom, 15)
 
                     }
+                    .shadow(radius: 5)
                 }
             }.padding(.top, 10)
         }
