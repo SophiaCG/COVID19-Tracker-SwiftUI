@@ -18,9 +18,10 @@ struct COVID19_Tracker_SwiftUIApp: App {
         FirebaseApp.configure(options: options!)
     }
     
+    @State var text: String = ""
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(text: $text)
         }
     }
 }

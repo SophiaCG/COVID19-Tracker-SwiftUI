@@ -4,69 +4,31 @@
 //
 //  Created by SCG on 8/13/21.
 //
-
 import Foundation
 
-
-//MARK: - World Statistics
-
-struct WorldResults: Codable {
-    var data: Data
-}
-
-struct Data: Codable {
-    var summary: Summary
-    var change: Summary
-}
-
-struct Summary: Codable {
-    var total_cases: Int
-    var active_cases: Int
-    var deaths: Int
-    var recovered: Int
-    var critical: Int
-    var tested: Int
-    
+//MARK: - Statistics from every country
+struct StatsResults: Codable {
+    var Country: String
+    var Continent: String
+    var ThreeLetterSymbol: String?
+    var TotalCases: Int
+    var NewCases: Int
+    var TotalDeaths: Int
+    var NewDeaths: Int
+    var TotalRecovered: String
+    var NewRecovered: Int
+    var ActiveCases: Int
+    var TotalTests: String
+    var Serious_Critical: Int
 }
 
 //MARK: - List of Countries
-
-struct CountriesResults: Codable {
-    var data: [ListData]
-}
-
-struct ListData: Codable {
-    var name: String
-}
-
-//MARK: - Statistics from every country
-
-struct CountryResults: Codable {
-    var country: String
-    var countryInfo: CountryInfo
-    var cases: Int
-    var todayCases: Int
-    var deaths: Int
-    var todayDeaths: Int
-    var recovered: Int
-    var todayRecovered: Int
-    var active: Int
-    var critical: Int
-    var tests: Int
-    var population: Int
-    var continent: String
-}
-
-struct CountryInfo: Codable {
-    var iso2: String
-    var iso3: String
-    var lat: Int
-    var long: Int
-    var flag: String
+struct CountriesList: Codable {
+    var Country: String
+    var ThreeLetterSymbol: String
 }
 
 //MARK: - Statistics from every state
-
 struct StateResults: Codable {
     var state: String
     var updated: Int
@@ -81,7 +43,6 @@ struct StateResults: Codable {
 }
 
 //MARK: - Historical data for the world
-
 struct WorldHistorical: Codable {
     var cases: [String: Int]
     var deaths: [String: Int]
@@ -89,12 +50,7 @@ struct WorldHistorical: Codable {
 }
 
 //MARK: - Historical data for every country
-
 struct CountryHistorical: Codable {
     var country: String
-    var timeline: Cases
-}
-
-struct Cases: Codable {
-    var cases: [String: Int]
+    var timeline: WorldHistorical
 }
