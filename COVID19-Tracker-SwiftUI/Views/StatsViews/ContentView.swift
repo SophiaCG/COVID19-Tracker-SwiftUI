@@ -11,7 +11,7 @@ import Charts
  TO-DO:
  1. Add historical data API-
  2. Connect search bar to list
- 3. Connect news stories to web links
+ 3. Connect news stories to web links-
  4. Connect data to charts
  5. Refactor text fields
  6. Add Firebase

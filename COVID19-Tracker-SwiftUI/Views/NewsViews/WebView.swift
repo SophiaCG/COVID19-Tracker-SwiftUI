@@ -11,7 +11,7 @@ import SwiftUI
 // Code from: https://benoitpasquier.com/create-webview-in-swiftui/
 struct WebViewRepresentable: UIViewRepresentable {
     typealias UIViewType = WKWebView
-
+    
     let webView: WKWebView
     
     func makeUIView(context: Context) -> WKWebView {
@@ -25,43 +25,16 @@ struct WebView: View {
     
     // WKWebView is passed as parameter to be rendered, but it’s the actual model that controls its content
     @StateObject var model = WebViewModel()
+    var url: String = ""
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            Color.black
-                .ignoresSafeArea()
             
-            VStack(spacing: 0) {
-                HStack(spacing: 10) {
-                    HStack {
-                        TextField("Search a url",
-                                  text: $model.urlString)
-                            .keyboardType(.URL)
-                            .autocapitalization(.none)
-                            .padding(10)
-                        Spacer()
-                    }
-                    .background(Color.white)
-                    .cornerRadius(30)
-                    
-                    Button("Go", action: {
-                        model.loadUrl()
-                        model.urlString = "https://vaccovid-coronavirus-vaccine-and-treatment-tracker.p.rapidapi.com/api/news/get-coronavirus-news/1?rapidapi-key=\(ViewModel().apiKey)"
-                    })
-                    .foregroundColor(.white)
-                    .padding(10)
-                    
-                }.padding(10)
-                
-                ZStack {
-                    WebViewRepresentable(webView: model.webView)
-                    
-                    if model.isLoading {
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle())
-                    }
-                }
-                
+            WebViewRepresentable(webView: model.webView)
+            
+            if model.isLoading {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
             }
         }
         .toolbar {
@@ -82,6 +55,9 @@ struct WebView: View {
                 
                 Spacer()
             }
+        }.onAppear() {
+            model.urlString = url
+            model.loadUrl()
         }
     }
 }

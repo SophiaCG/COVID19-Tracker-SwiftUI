@@ -13,56 +13,62 @@ struct NewsView: View {
     @State var news: [News] = []
     
     var body: some View {
-
-        ScrollView {
-            
-            ZStack {
-                Rectangle()
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.13)
-                    .foregroundColor(.red)
-                    .ignoresSafeArea()
-                HStack {
-                    Text("Coronavirus News")
-                        .font(.largeTitle)
-                        .bold()
-                        .foregroundColor(.white)
-                        .padding(.leading, 15)
-                    Spacer()
-                }.padding(.top, 20)
-            }
-
-            
-            VStack (alignment: .leading, spacing: 13) {
-                ForEach(news.indices, id: \.self) { index in
-                    ZStack {
-                        Rectangle()
-                            .frame(width: UIScreen.main.bounds.width * 0.95, height: UIScreen.main.bounds.height * 0.15)
+        NavigationView {
+            ScrollView {
+                
+                ZStack {
+                    Rectangle()
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.13)
+                        .foregroundColor(.red)
+                        .ignoresSafeArea()
+                    HStack {
+                        Text("Coronavirus News")
+                            .font(.largeTitle)
+                            .bold()
                             .foregroundColor(.white)
-                            .cornerRadius(17)
-                            .shadow(radius: 3)
-
-                        HStack(alignment: .center, spacing: 15) {
-                            
-                            RemoteImage(url: news[index].urlToImage)
-                                .frame(width: 120, height: 100)
-                                .cornerRadius(10)
-
-                            Text(news[index].title)
-                                .bold()
-                                .foregroundColor(.black)
-                                .lineLimit(3)
-
-                        }.frame(width: UIScreen.main.bounds.width * 0.9)
+                            .padding(.leading, 15)
+                        Spacer()
+                    }.padding(.top, 20)
+                }
+                
+                
+                VStack (alignment: .leading, spacing: 13) {
+                    ForEach(news.indices, id: \.self) { index in
+                        NavigationLink(destination: WebView(url: news[index].link)) {
+                            ZStack {
+                                Rectangle()
+                                    .frame(width: UIScreen.main.bounds.width * 0.95, height: UIScreen.main.bounds.height * 0.15)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(17)
+                                    .shadow(radius: 3)
+                                
+                                HStack(alignment: .center, spacing: 15) {
+                                    
+                                    RemoteImage(url: news[index].urlToImage)
+                                        .frame(width: 120, height: 100)
+                                        .cornerRadius(10)
+                                    
+                                    Text(news[index].title)
+                                        .bold()
+                                        .foregroundColor(.black)
+                                        .lineLimit(3)
+                                    
+                                }.frame(width: UIScreen.main.bounds.width * 0.9)
+                            }
+                        }
                     }
+                    .navigationBarTitle("", displayMode: .inline)
+                    .navigationBarHidden(true)
+                    
                 }
             }
-        }
-        .background(Color(UIColor.systemGray5))
-        .ignoresSafeArea()
-        .onAppear() {
-            WebViewModel().getNews { (results) in
-                for article in results.news {
-                    news.append(article)
+            .background(Color(UIColor.systemGray5))
+            .ignoresSafeArea()
+            .onAppear() {
+                WebViewModel().getNews { (results) in
+                    for article in results.news {
+                        news.append(article)
+                    }
                 }
             }
         }

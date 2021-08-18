@@ -35,7 +35,7 @@ class WebViewModel: ObservableObject {
         setupBindings()
     }
     
-    @Published var urlString: String = ""
+    @Published var urlString: String = "https://www.cbsnews.com/news/dallas-hospitals-pediatric-icu-beds-covid/"
     @Published var canGoBack: Bool = false
     @Published var canGoForward: Bool = false
     @Published var isLoading: Bool = false

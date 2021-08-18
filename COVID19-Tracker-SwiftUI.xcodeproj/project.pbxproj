@@ -171,8 +171,8 @@
 			isa = PBXGroup;
 			children = (
 				4A93BFD726CA529500FBDF2F /* NewsView.swift */,
-				4A025D5026CBA2BE00B87159 /* RemoteImage.swift */,
 				4A6556D926CC64210015850D /* WebView.swift */,
+				4A025D5026CBA2BE00B87159 /* RemoteImage.swift */,
 			);
 			path = NewsViews;
 			sourceTree = "<group>";
