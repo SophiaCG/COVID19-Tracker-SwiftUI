@@ -13,23 +13,45 @@ import Charts
  2. Connect search bar to list
  3. Connect news stories to web links-
  4. Connect data to charts
- 5. Refactor text fields
+ 5. Refactor text fields-
  6. Add Firebase
  7. Add Combine
  8. Add Unit Tests
  */
 
+struct StatsData {
+    var names: [String] = ["Total Cases", "Recovered", "Deaths", "Active Cases", "Critical", "Tested"]
+    var colors: [Color] = [.yellow, .green, .red, .blue, .orange, .purple]
+    var results: [Int] = []
+    var subResults: [Int] = []
+}
+
+struct StatsView: View {
+    
+    var names: [String] = ["Total Cases", "Recovered", "Deaths", "Active Cases", "Critical", "Tested"]
+    
+    var body: some View {
+        
+        ForEach(0..<names.count/3) { row in // create number of rows
+            HStack {
+                ForEach(0..<3) { column in // create 3 columns
+                    Text(self.names[row * 3 + column])
+                }
+            }
+        }
+    }
+}
+
 struct ContentView: View {
     
-    @State var result: [StatsResults] = []
-//    @State var countriesList: [CountriesList] = []
+    @State var stats = StatsData()
     @State var isEditing: Bool = false
     @Binding var text: String
     
     var body: some View {
         
         SearchBar(text: text, isEditing: $isEditing)
-
+        
         ZStack {
             
             if !isEditing {
@@ -45,80 +67,29 @@ struct ContentView: View {
                                     .padding(.bottom, -15)
                                 Spacer()
                             }
-                            HStack (alignment: .center, spacing: 30) {
-                                VStack (spacing: 10) {
-                                    Text("Total Cases")
-                                        .bold()
-                                        .font(.title3)
-                                        .foregroundColor(Color(UIColor.systemGray))
-                                    Text("\(result.count != 0 ? result[0].TotalCases : 0)")
-                                        .bold()
-                                        .foregroundColor(.yellow)
-                                    Text("\(result.count != 0 && result[0].NewCases >= 0 ? "+" : "")\(result.count != 0 ? result[0].NewCases : 0)")
-                                        .bold()
-                                        .font(.subheadline)
-                                        .foregroundColor(.yellow)
-                                        .opacity(0.6)
-                                }
-                                VStack (spacing: 10) {
-                                    Text("Recovered")
-                                        .bold()
-                                        .font(.title3)
-                                        .foregroundColor(Color(UIColor.systemGray))
-                                    Text("\(result.count != 0 ? result[0].TotalRecovered : "0")")
-                                        .bold()
-                                        .foregroundColor(.green)
-                                    Text("\(result.count != 0 && result[0].NewRecovered >= 0 ? "+" : "")\(result.count != 0 ? result[0].NewRecovered : 0)")
-                                        .bold()
-                                        .font(.subheadline)
-                                        .foregroundColor(.green)
-                                        .opacity(0.6)
-                                }
-                                VStack (spacing: 10) {
-                                    Text("Deaths")
-                                        .bold()
-                                        .font(.title3)
-                                        .foregroundColor(Color(UIColor.systemGray))
-                                    Text("\(result.count != 0 ? result[0].TotalDeaths : 0)")
-                                        .bold()
-                                        .foregroundColor(.red)
-                                    Text("\(result.count != 0 && result[0].NewDeaths >= 0 ? "+" : "")\(result.count != 0 ? result[0].NewDeaths : 0)")
-                                        .bold()
-                                        .font(.subheadline)
-                                        .foregroundColor(.red)
-                                        .opacity(0.6)
-                                    
-                                }
-                                
-                            }
                             
-                            HStack (alignment: .center, spacing: 30) {
-                                VStack (spacing: 10) {
-                                    Text("Active Cases")
-                                        .bold()
-                                        .font(.title3)
-                                        .foregroundColor(Color(UIColor.systemGray))
-                                    Text("\(result.count != 0 ? result[0].ActiveCases : 0)")
-                                        .bold()
-                                        .foregroundColor(.blue)
-                                }
-                                VStack (spacing: 10) {
-                                    Text("Critical")
-                                        .bold()
-                                        .font(.title3)
-                                        .foregroundColor(Color(UIColor.systemGray))
-                                    Text("\(result.count != 0 ? result[0].Serious_Critical : 0)")
-                                        .bold()
-                                        .foregroundColor(.orange)
-                                }
-                                VStack (spacing: 10) {
-                                    Text("Tested")
-                                        .bold()
-                                        .font(.title3)
-                                        .foregroundColor(Color(UIColor.systemGray))
-                                    Text("\(result.count != 0 ? result[0].TotalTests : "0")")
-                                        .bold()
-                                        .foregroundColor(.purple)
+                            ForEach(0..<stats.results.count/3, id: \.self) { row in // create number of rows
+                                HStack (spacing: 30) {
+                                    ForEach(0..<3) { column in // create 3 columns
+                                        HStack {
+                                            VStack (spacing: 10) {
+                                                Text("\(stats.names[row * 3 + column])")
+                                                    .bold()
+                                                    .font(.title3)
+                                                    .foregroundColor(Color(UIColor.systemGray))
+                                                Text("\(stats.results[row * 3 + column])")
+                                                    .bold()
+                                                    .foregroundColor(stats.colors[row * 3 + column])
+                                                if row == 0 {
+                                                    Text("\(stats.subResults.count != 0 && stats.subResults[column] >= 0 ? "+" : "")\(stats.subResults[column])")
+                                                        .bold()
+                                                        .font(.subheadline)
+                                                        .foregroundColor(stats.colors[column])
+                                                        .opacity(0.6)
+                                                }
+                                            }
+                                        }.padding(.trailing, row == 0 ? 0 : (column < 2 ? 20 : 15))
+                                    }
                                 }
                             }
                         }
@@ -167,8 +138,21 @@ struct ContentView: View {
                 }
                 .onAppear() {
                     ViewModel().getResults { (results) in
-                        result.append(results[0])
-                        print("APPENDED \(results[0].ActiveCases) TO \(result[0].ActiveCases)")
+                        
+                        let result = results[0]
+                        
+                        stats.results.append(result.TotalCases)
+                        stats.subResults.append(result.NewCases)
+                        
+                        stats.results.append(Int(result.TotalRecovered) ?? 0)
+                        stats.subResults.append(result.NewRecovered)
+                        
+                        stats.results.append(result.TotalDeaths)
+                        stats.subResults.append(result.NewDeaths)
+                        
+                        stats.results.append(result.ActiveCases)
+                        stats.results.append(result.Serious_Critical)
+                        stats.results.append(Int(result.TotalTests) ?? 0)
                     }
                     ViewModel().getWorldHistory() { (results) in
                         print("APPENDED \(results.cases)")
@@ -176,7 +160,7 @@ struct ContentView: View {
                 }
                 
             } else {
-//                ListView(text: $text, isEditing: $isEditing)
+                //                ListView(text: $text, isEditing: $isEditing)
             }
             
         }
