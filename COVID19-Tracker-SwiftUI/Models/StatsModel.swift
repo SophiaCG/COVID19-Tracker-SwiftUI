@@ -30,6 +30,10 @@ struct CountriesList: Codable {
     var ThreeLetterSymbol: String
 }
 
+extension CountriesList {
+    static var countriesList: [CountriesList] = []
+}
+
 //MARK: - Statistics from every state
 struct StateResults: Codable {
     var state: String

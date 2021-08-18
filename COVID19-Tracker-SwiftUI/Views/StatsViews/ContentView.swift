@@ -9,7 +9,7 @@ import Charts
 
 /*
  TO-DO:
- 1. Add historical data API
+ 1. Add historical data API-
  2. Connect search bar to list
  3. Connect news stories to web links
  4. Connect data to charts
@@ -22,7 +22,7 @@ import Charts
 struct ContentView: View {
     
     @State var result: [StatsResults] = []
-    @State var countriesList: [CountriesList] = []
+//    @State var countriesList: [CountriesList] = []
     @State var isEditing: Bool = false
     @Binding var text: String
     
@@ -170,10 +170,13 @@ struct ContentView: View {
                         result.append(results[0])
                         print("APPENDED \(results[0].ActiveCases) TO \(result[0].ActiveCases)")
                     }
+                    ViewModel().getWorldHistory() { (results) in
+                        print("APPENDED \(results.cases)")
+                    }
                 }
                 
             } else {
-                ListView(countriesList: $countriesList, text: $text, isEditing: $isEditing)
+//                ListView(text: $text, isEditing: $isEditing)
             }
             
         }

@@ -13,6 +13,7 @@ struct NewsView: View {
     @State var news: [News] = []
     
     var body: some View {
+
         ScrollView {
             
             ZStack {
@@ -31,41 +32,35 @@ struct NewsView: View {
             }
 
             
-            VStack (spacing: 30) {
+            VStack (alignment: .leading, spacing: 13) {
                 ForEach(news.indices, id: \.self) { index in
                     ZStack {
-                        RemoteImage(url: news[index].urlToImage)
-                            .frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.4)
-                            .cornerRadius(30)
                         Rectangle()
-                            .fill(LinearGradient(gradient: Gradient(colors: [.clear, .black]), startPoint: .center, endPoint: .bottom))
-                            .frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.4)
-                            .cornerRadius(30)
-                        VStack {
-                            Spacer()
+                            .frame(width: UIScreen.main.bounds.width * 0.95, height: UIScreen.main.bounds.height * 0.15)
+                            .foregroundColor(.white)
+                            .cornerRadius(17)
+                            .shadow(radius: 3)
+
+                        HStack(alignment: .center, spacing: 15) {
+                            
+                            RemoteImage(url: news[index].urlToImage)
+                                .frame(width: 120, height: 100)
+                                .cornerRadius(10)
+
                             Text(news[index].title)
                                 .bold()
-                                .foregroundColor(.white)
-                                .font(.title)
-                            Text(news[index].content)
-                                .bold()
-                                .foregroundColor(.white)
-                                .font(.title3)
-                                .lineLimit(2)
+                                .foregroundColor(.black)
+                                .lineLimit(3)
 
-                        }
-                        .frame(width: UIScreen.main.bounds.width * 0.85)
-                        .padding(.bottom, 15)
-
+                        }.frame(width: UIScreen.main.bounds.width * 0.9)
                     }
-                    .shadow(radius: 5)
                 }
-            }.padding(.top, 10)
+            }
         }
         .background(Color(UIColor.systemGray5))
         .ignoresSafeArea()
         .onAppear() {
-            ViewModel().getNews { (results) in
+            WebViewModel().getNews { (results) in
                 for article in results.news {
                     news.append(article)
                 }
