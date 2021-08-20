@@ -10,9 +10,9 @@ import SwiftUI
 
 struct LogInView: View {
     
-    @State var email: String = ""
-    @State var password: String = ""
-    @EnvironmentObject var viewModel: AppViewModel
+//    @State var email: String = ""
+//    @State var password: String = ""
+    @EnvironmentObject var viewModel: LogInSignUpVM
 
     var body: some View {
         
@@ -44,7 +44,7 @@ struct LogInView: View {
                             .padding(50)
                             .multilineTextAlignment(.center)
                         
-                        TextField("Email Address", text: $email)
+                        TextField("Email Address", text: $viewModel.email)
                             .autocapitalization(.none)
                             .disableAutocorrection(true)
                             .frame(width: UIScreen.main.bounds.width * 0.8, height: 50)
@@ -55,8 +55,15 @@ struct LogInView: View {
                                     .foregroundColor(Color(.secondarySystemFill))
                                     .frame(width: UIScreen.main.bounds.width * 0.9, height: 70)
                             )
+                        TextField("", text: $viewModel.errorMessage)
+                            .disabled(true)
+                            .foregroundColor(.red)
+                            .padding(.bottom, 10)
+                            .padding(.leading, 40)
+                            .font(.subheadline)
+
                         
-                        SecureField("Password", text: $password)
+                        SecureField("Password", text: $viewModel.password)
                             .autocapitalization(.none)
                             .disableAutocorrection(true)
                             .frame(width: UIScreen.main.bounds.width * 0.8, height: 50)
@@ -67,9 +74,21 @@ struct LogInView: View {
                                     .foregroundColor(Color(.secondarySystemFill))
                                     .frame(width: UIScreen.main.bounds.width * 0.9, height: 70)
                             )
+                        
+                        TextField("", text: $viewModel.errorMessage2)
+                            .disabled(true)
+                            .foregroundColor(.red)
+                            .padding(.bottom, 10)
+                            .padding(.leading, 40)
+                            .font(.subheadline)
+
                                    
                         Button(action: {
-//                            viewModel.signIn(email: email, password: password)
+                            guard !viewModel.email.isEmpty, !viewModel.password.isEmpty else {
+                                return
+                            }
+                            
+                            viewModel.logIn(email: viewModel.email, password: viewModel.password)
                         }, label: {
                             Text("Log In")
                                 .bold()

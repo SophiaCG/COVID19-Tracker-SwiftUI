@@ -23,7 +23,7 @@ struct COVID19_Tracker_SwiftUIApp: App {
     @State var text: String = ""
     @State var isEditing: Bool = false
 
-    let viewModel = AppViewModel()
+    let viewModel = LogInSignUpVM()
 
     var body: some Scene {
         WindowGroup {
