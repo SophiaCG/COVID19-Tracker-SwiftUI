@@ -13,6 +13,9 @@
 		4A29982D26C78B5C00055C96 /* GoogleService-Info-CTS.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A29982826C78B5C00055C96 /* GoogleService-Info-CTS.plist */; };
 		4A6556DA26CC64210015850D /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6556D926CC64210015850D /* WebView.swift */; };
 		4A6556DE26CC67520015850D /* WebViewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6556DD26CC67520015850D /* WebViewVM.swift */; };
+		4A8F0F5026CE3E75003FFD15 /* FirebaseVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8F0F4F26CE3E75003FFD15 /* FirebaseVM.swift */; };
+		4A8F0F5426CE497F003FFD15 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8F0F5326CE497E003FFD15 /* SignUpView.swift */; };
+		4A8F0F5626CE4B34003FFD15 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8F0F5526CE4B34003FFD15 /* LogInView.swift */; };
 		4A93BFD226CA448F00FBDF2F /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A93BFD126CA448F00FBDF2F /* SearchBar.swift */; };
 		4A93BFD626CA44B000FBDF2F /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A93BFD526CA44B000FBDF2F /* ListView.swift */; };
 		4A93BFD826CA529500FBDF2F /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A93BFD726CA529500FBDF2F /* NewsView.swift */; };
@@ -95,6 +98,9 @@
 		4A29982826C78B5C00055C96 /* GoogleService-Info-CTS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info-CTS.plist"; path = "../../../../../Downloads/GoogleService-Info-CTS.plist"; sourceTree = "<group>"; };
 		4A6556D926CC64210015850D /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		4A6556DD26CC67520015850D /* WebViewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewVM.swift; sourceTree = "<group>"; };
+		4A8F0F4F26CE3E75003FFD15 /* FirebaseVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseVM.swift; sourceTree = "<group>"; };
+		4A8F0F5326CE497E003FFD15 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		4A8F0F5526CE4B34003FFD15 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		4A93BFD126CA448F00FBDF2F /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		4A93BFD526CA44B000FBDF2F /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		4A93BFD726CA529500FBDF2F /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
@@ -160,6 +166,8 @@
 		4A6556DF26CC67AC0015850D /* StatsViews */ = {
 			isa = PBXGroup;
 			children = (
+				4A8F0F5326CE497E003FFD15 /* SignUpView.swift */,
+				4A8F0F5526CE4B34003FFD15 /* LogInView.swift */,
 				4AC040CA26C7378A00EBFC79 /* ContentView.swift */,
 				4A93BFD126CA448F00FBDF2F /* SearchBar.swift */,
 				4A93BFD526CA44B000FBDF2F /* ListView.swift */,
@@ -254,6 +262,7 @@
 			children = (
 				4AC040F326C76EAD00EBFC79 /* ViewModel.swift */,
 				4A6556DD26CC67520015850D /* WebViewVM.swift */,
+				4A8F0F4F26CE3E75003FFD15 /* FirebaseVM.swift */,
 				4A49A46126CB936000D8DBFE /* Charts */,
 			);
 			path = ViewModels;
@@ -497,10 +506,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AD0E9A426C7AF4100C444D5 /* NewsModel.swift in Sources */,
+				4A8F0F5626CE4B34003FFD15 /* LogInView.swift in Sources */,
 				4A93BFD826CA529500FBDF2F /* NewsView.swift in Sources */,
 				4A6556DA26CC64210015850D /* WebView.swift in Sources */,
 				4AC040CB26C7378A00EBFC79 /* ContentView.swift in Sources */,
+				4A8F0F5426CE497F003FFD15 /* SignUpView.swift in Sources */,
 				4A93BFD626CA44B000FBDF2F /* ListView.swift in Sources */,
+				4A8F0F5026CE3E75003FFD15 /* FirebaseVM.swift in Sources */,
 				4AC040F426C76EAD00EBFC79 /* ViewModel.swift in Sources */,
 				4A6556DE26CC67520015850D /* WebViewVM.swift in Sources */,
 				4A025D5126CBA2BE00B87159 /* RemoteImage.swift in Sources */,
